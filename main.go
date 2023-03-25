@@ -22,15 +22,18 @@ func main() {
 		numFilesStr = "1000"
 	}
 
-	// Print contents of temporary folder
-	fmt.Printf("Temporary folder contents before generating files:\n")
-	files, err := os.ReadDir(tempFolder)
-	if err != nil {
-		fmt.Printf("Error reading temporary folder contents: %s\n", err)
-		return
-	}
-	for _, f := range files {
-		fmt.Printf("%s\n", f.Name())
+	debug, _ := strconv.ParseBool(os.Getenv("DEBUG"))
+	if debug {
+		// Print contents of temporary folder
+		fmt.Printf("Temporary folder contents before generating files:\n")
+		files, err := os.ReadDir(tempFolder)
+		if err != nil {
+			fmt.Printf("Error reading temporary folder contents: %s\n", err)
+			return
+		}
+		for _, f := range files {
+			fmt.Printf("%s\n", f.Name())
+		}
 	}
 
 	// convert number of files to int

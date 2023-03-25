@@ -2,7 +2,6 @@ FROM golang:alpine AS builder
 
 WORKDIR /build
 COPY go.mod ./
-# COPY go.sum ./
 COPY *.go ./
 
 RUN go build -o nas-perf-test
