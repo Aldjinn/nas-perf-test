@@ -5,22 +5,34 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 )
 
 const (
 	fileSize  = 128 * 1024 // 128KB
-	numFiles  = 1000
-	chunkSize = 4096 // 4KB
+	chunkSize = 4096       // 4KB
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Printf("Usage: %s <temp_folder_path>\n", os.Args[0])
-		os.Exit(1)
+	// read number of files and temp folder from environment variables or use defaults
+	numFilesStr := os.Getenv("NUM_FILES")
+	if numFilesStr == "" {
+		numFilesStr = "1000"
+	}
+	tempFolder := "/app/nas-perf-test-folder"
+
+	err := os.MkdirAll("/app/nas-perf-test-folder", os.ModePerm)
+	if err != nil {
+		panic(err)
 	}
 
-	tempFolder := os.Args[1]
+	// convert number of files to int
+	numFiles, err := strconv.Atoi(numFilesStr)
+	if err != nil {
+		fmt.Printf("Error parsing NUM_FILES: %s\n", err)
+		os.Exit(1)
+	}
 
 	startTime := time.Now()
 
