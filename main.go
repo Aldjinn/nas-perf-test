@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -11,8 +10,9 @@ import (
 )
 
 const (
-	fileSize  = 128 * 1024 // 128KB
-	chunkSize = 4096       // 4KB
+	fileSize   = 128 * 1024 // 128KB
+	chunkSize  = 4096       // 4KB
+	tempFolder = "/nas-perf-test-folder"
 )
 
 func main() {
@@ -22,11 +22,9 @@ func main() {
 		numFilesStr = "1000"
 	}
 
-	tempFolder := "/nas-perf-test-folder"
-
 	// Print contents of temporary folder
 	fmt.Printf("Temporary folder contents before generating files:\n")
-	files, err := ioutil.ReadDir(tempFolder)
+	files, err := os.ReadDir(tempFolder)
 	if err != nil {
 		fmt.Printf("Error reading temporary folder contents: %s\n", err)
 		return
@@ -34,11 +32,6 @@ func main() {
 	for _, f := range files {
 		fmt.Printf("%s\n", f.Name())
 	}
-
-	// err := os.MkdirAll("/nas-perf-test-folder", os.ModePerm)
-	// if err != nil {
-	// 	panic(err)
-	// }
 
 	// convert number of files to int
 	numFiles, err := strconv.Atoi(numFilesStr)
