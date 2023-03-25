@@ -20,12 +20,12 @@ func main() {
 	if numFilesStr == "" {
 		numFilesStr = "1000"
 	}
-	tempFolder := "/app/nas-perf-test-folder"
+	tempFolder := "/nas-perf-test-folder"
 
-	err := os.MkdirAll("/app/nas-perf-test-folder", os.ModePerm)
-	if err != nil {
-		panic(err)
-	}
+	// err := os.MkdirAll("/nas-perf-test-folder", os.ModePerm)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 	// convert number of files to int
 	numFiles, err := strconv.Atoi(numFilesStr)
