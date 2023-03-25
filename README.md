@@ -10,7 +10,7 @@ docker run --rm -v ${PWD}:/nas-perf-test-folder -e NUM_FILES=4096 nas-perf-test
 ## Examples
 
 ```bash
-nc11701d@vc60:~/nas/vc60 » docker run --rm -v ~/nas/vc60:/nas-perf-test-folder -e NUM_FILES=4096 nas-perf-test
+nc11701d@vc60:~/nas/vc60 » docker run --rm -v ~/nas/vc60:/nas-perf-test-folder -e NUM_FILES=4096 -e DEBUG=false nas-perf-test
 Wrote 2% of files to filesystem
 Wrote 5% of files to filesystem
 Wrote 7% of files to filesystem
